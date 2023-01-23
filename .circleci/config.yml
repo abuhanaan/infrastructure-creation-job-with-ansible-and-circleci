@@ -1,9 +1,9 @@
 version: 2.1
 # Use a package of configuration called an orb.
-orbs:
-  # Choose either one of the orbs below 
-  # welcome: circleci/welcome-orb@0.4.1
-  aws-cli: circleci/aws-cli@2.0.3
+# orbs:
+#   # Choose either one of the orbs below 
+#   # welcome: circleci/welcome-orb@0.4.1
+#   aws-cli: circleci/aws-cli@2.0.3
 
 command:
   destroy_environment:
@@ -30,13 +30,31 @@ jobs:
               --template-file template.yml \
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-2
-      - destroy_environment
+      # - destroy_environment
+
+  # Exercise: Config and Deployment
+  configure_infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["a9:2f:32:0c:9d:74:c5:f0:80:93:ad:07:35:32:0b:82"]
+      - run:
+          name: Install Dependecies
+          command: |
+            apk add --update ansible
+      - run:
+          name: Configure Server
+          command: |
+            ansible-playbook -i inventory.txt main-remote.yml
         
 # Sequential workflow
 workflows:
   # Name the workflow
   myWorkflow:
     jobs:
-      - create_infrastructure
+      # - create_infrastructure
+       - configure_infrastructure
 
 # VS Code Extension Version: 1.5.1
