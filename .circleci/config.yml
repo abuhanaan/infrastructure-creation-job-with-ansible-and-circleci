@@ -5,7 +5,7 @@ version: 2.1
 #   # welcome: circleci/welcome-orb@0.4.1
 #   aws-cli: circleci/aws-cli@2.0.3
 
-command:
+commands:
   destroy_environment:
     steps:
       - run:
