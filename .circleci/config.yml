@@ -79,7 +79,7 @@ jobs:
       - destroy_environment
 
 # Sequential workflow
-workflows:
+workflows: 
   # Name the workflow
   myWorkflow:
     jobs:
