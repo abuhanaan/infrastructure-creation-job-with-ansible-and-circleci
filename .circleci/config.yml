@@ -30,7 +30,7 @@ jobs:
               --template-file template.yml \
               --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
               --region us-east-2
-      # - destroy_environment
+  
 
   # Exercise: Config and Deployment
   configure_infrastructure:
@@ -66,14 +66,25 @@ jobs:
             else
               return 1
             fi
-        
+
+  # Exercise: Rollback - (This smoke test is set to fail to trigger a rollback)
+  smoke_test2:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run:
+          name: Test Job
+          # Fail the job intentionally to simulate an error.
+          command:  return 1
+      - destroy_environment 
+
 # Sequential workflow
 workflows:
   # Name the workflow
   myWorkflow:
     jobs:
-      # - create_infrastructure
+      - create_infrastructure
       #  - configure_infrastructure
-        - smoke_test
+      - smoke_test2
 
 # VS Code Extension Version: 1.5.1
