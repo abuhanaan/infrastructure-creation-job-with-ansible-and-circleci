@@ -76,7 +76,7 @@ jobs:
           name: Test Job
           # Fail the job intentionally to simulate an error.
           command:  return 1
-      - destroy_environment 
+      # - destroy_environment 
 
 # Sequential workflow
 workflows:
@@ -85,6 +85,6 @@ workflows:
     jobs:
       - create_infrastructure
       #  - configure_infrastructure
-      - smoke_test2
+      - smoke_test
 
 # VS Code Extension Version: 1.5.1
