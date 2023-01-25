@@ -70,7 +70,7 @@ jobs:
   # Exercise: Rollback - (This smoke test is set to fail to trigger a rollback)
   smoke_test2:
     docker:
-      - image: alpine:latest
+      - image: amazon/aws-cli
     steps:
       - run:
           name: Test Job
