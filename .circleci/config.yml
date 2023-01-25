@@ -47,6 +47,9 @@ jobs:
           name: Configure Server
           command: |
             ansible-playbook -i inventory.txt main-remote.yml
+      - run: return 1
+      - destroy_environment
+        when: on_fail
 
   # Exercise: Smoke Testing
   smoke_test:
@@ -85,6 +88,6 @@ workflows:
     jobs:
       - create_infrastructure
       #  - configure_infrastructure
-      - smoke_test2
+      # - smoke_test2
 
 # VS Code Extension Version: 1.5.1
