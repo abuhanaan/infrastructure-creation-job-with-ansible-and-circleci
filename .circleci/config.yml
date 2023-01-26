@@ -98,7 +98,7 @@ jobs:
             --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7} \
             --parameter-overrides MyBucketName="mybucket-${CIRCLE_WORKFLOW_ID:0:7}"
       # Uncomment the step below if yoou wish to upload all contents of the current directory to the S3 bucket
-      # - run: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete
+      - run: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete
 
 
   # Exercise: Promote to Production - Job 2
@@ -133,7 +133,7 @@ jobs:
             aws cloudformation deploy \
             --template-file cloudfront.yml \
             --stack-name production-distro \
-            --parameter-overrides PipelineID="mybucket-${CIRCLE_WORKFLOW_ID:0:7}"
+            --parameter-overrides PipelineID="mybucket-${CIRCLE_WORKFLOW_ID}"
 
   # Destroy the previous production version's S3 bucket and CloudFormation stack. 
   clean_up_old_front_end:
@@ -161,9 +161,9 @@ workflows:
       # - create_infrastructure
       #  - configure_infrastructure
       # - smoke_test2
-      # - create_and_deploy_front_end
+      - create_and_deploy_front_end
       # - get_last_deployment_id
       # - promote_to_production
-      - clean_up_old_front_end
+      # - clean_up_old_front_end
 
 # VS Code Extension Version: 1.5.1
