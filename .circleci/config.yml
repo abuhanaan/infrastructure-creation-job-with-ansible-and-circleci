@@ -163,7 +163,7 @@ workflows:
       # - smoke_test2
       # - create_and_deploy_front_end
       # - get_last_deployment_id
-      - promote_to_production
-      # - clean_up_old_front_end
+      # - promote_to_production
+      - clean_up_old_front_end
 
 # VS Code Extension Version: 1.5.1
