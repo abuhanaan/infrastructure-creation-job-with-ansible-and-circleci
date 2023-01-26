@@ -119,6 +119,7 @@ jobs:
           root: ~/
           paths: 
             - textfile.txt
+      - run: cat text.file
 
   # Executes the cloudfront.yml template that will modify the existing CloudFront Distribution, change its target from the old bucket to the new bucket - `mybucket-${CIRCLE_WORKFLOW_ID:0:7}`. 
   # Notice here we use the stack name `production-distro` which is the same name we used while deploying to the S3 bucket manually.
@@ -162,18 +163,18 @@ workflows:
       #  - configure_infrastructure
       # - smoke_test2
       # - create_and_deploy_front_end
-      # - get_last_deployment_id
+      - get_last_deployment_id
       # - promote_to_production
       # - clean_up_old_front_end
 
-      - create_and_deploy_front_end
-      - promote_to_production:
-          requires: 
-            - create_and_deploy_front_end
-      - get_last_deployment_id
-      - clean_up_old_front_end:
-          requires:
-            - get_last_deployment_id
-            - promote_to_production
+      # - create_and_deploy_front_end
+      # - promote_to_production:
+      #     requires: 
+      #       - create_and_deploy_front_end
+      # - get_last_deployment_id
+      # - clean_up_old_front_end:
+      #     requires:
+      #       - get_last_deployment_id
+      #       - promote_to_production
 
 # VS Code Extension Version: 1.5.1
