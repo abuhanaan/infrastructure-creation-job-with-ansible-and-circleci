@@ -119,7 +119,7 @@ jobs:
           root: ~/
           paths: 
             - textfile.txt
-      - run: echo PipelineID
+      - run: echo ${PipelineID}
 
   # Executes the cloudfront.yml template that will modify the existing CloudFront Distribution, change its target from the old bucket to the new bucket - `mybucket-${CIRCLE_WORKFLOW_ID:0:7}`. 
   # Notice here we use the stack name `production-distro` which is the same name we used while deploying to the S3 bucket manually.
