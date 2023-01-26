@@ -161,8 +161,8 @@ workflows:
       # - create_infrastructure
       #  - configure_infrastructure
       # - smoke_test2
-      - create_and_deploy_front_end
-      # - get_last_deployment_id
+      # - create_and_deploy_front_end
+      - get_last_deployment_id
       # - promote_to_production
       # - clean_up_old_front_end
 
